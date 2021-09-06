@@ -19,7 +19,7 @@ public class Chatroom {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column
-    private long id;
+    private String id;
 
     @Column
     private String name;
