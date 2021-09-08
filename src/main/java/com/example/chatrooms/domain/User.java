@@ -32,9 +32,8 @@ public class User {
     @Column
     private String password;
 
-    @OneToOne
-    @JoinColumn (name ="role_id")
-    private Role role;
+    @Column (name ="role_id")
+    private String roleId;
 
     @Column
     private boolean blocked;

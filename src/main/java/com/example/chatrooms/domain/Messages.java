@@ -22,13 +22,11 @@ public class Messages {
     @Column
     private String id;
 
-    @OneToOne
-    @JoinColumn (name ="user_id")
-    private User user;
+    @Column (name ="user_id")
+    private String userId;
 
-    @OneToOne
-    @JoinColumn (name ="chatroom_id")
-    private Chatroom chatroom;
+    @Column (name ="chatroom_id")
+    private String chatroomId;
 
     @Column
     private Date datetime;

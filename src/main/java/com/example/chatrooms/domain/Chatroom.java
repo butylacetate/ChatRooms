@@ -24,9 +24,8 @@ public class Chatroom {
     @Column
     private String name;
 
-    @OneToOne
-    @JoinColumn (name ="user_id")
-    private User owner;
+    @Column(name = "owner_id")
+    private String ownerId;
 
     @Column
     private boolean privat;
