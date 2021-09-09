@@ -17,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -32,17 +32,17 @@ public class User {
     @Column
     private String password;
 
-    @Column (name ="role_id")
-    private String roleId;
+    @Column
+    private Role role;
 
     @Column
     private boolean blocked;
 
     @ManyToMany
-    @JoinTable (
-        name="users_and_chatrooms",
-        joinColumns = {@JoinColumn(name="user_id")},
-        inverseJoinColumns ={@JoinColumn(name="chatroom_id")}
+    @JoinTable(
+            name = "users_and_chatrooms",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "chatroom_id")}
     )
     private Set<Chatroom> chatrooms = new HashSet<>();
 

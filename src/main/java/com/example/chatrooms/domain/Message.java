@@ -1,4 +1,5 @@
 package com.example.chatrooms.domain;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -13,8 +14,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "messages")
-public class Messages {
+@Table(name = "message")
+public class Message {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -22,10 +23,10 @@ public class Messages {
     @Column
     private String id;
 
-    @Column (name ="user_id")
+    @Column(name = "user_id")
     private String userId;
 
-    @Column (name ="chatroom_id")
+    @Column(name = "chatroom_id")
     private String chatroomId;
 
     @Column
