@@ -1,10 +1,10 @@
 package com.example.chatrooms.controller;
 
 import com.example.chatrooms.domain.Message;
+import com.example.chatrooms.service.MessageService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
@@ -12,23 +12,31 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/message")
 public class MessageController {
 
-    @GetMapping("/{messageId}")
-    public ResponseEntity<Message> getMessageById(@PathVariable String messageId) {
-        return ResponseEntity.ok().build();
+    private final MessageService messageService;
+
+    @GetMapping("{messageId}")
+    public String getMessage(@PathVariable String messageId, Model model) {
+        model.addAttribute("user", messageService.getById(messageId));
+        return "message";
     }
 
-    @PostMapping
-    public ResponseEntity<Message> createUser(@RequestBody Message message) {
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    @GetMapping("message")
+    public String createMessage(@RequestParam String text, @RequestParam String userId, @RequestParam String chatroomId, Model model) {
+        model.addAttribute("text", text);
+        model.addAttribute("userId", userId);
+        model.addAttribute("chatroomId", chatroomId);
+        messageService.create(Message.builder().text(text).userId(userId).chatroomId(chatroomId).build());
+        return "messageEdit";
     }
 
     @PutMapping("{messageId}")
-    public ResponseEntity<Message> updateUser(@PathVariable String messageId, @RequestBody Message message) {
-        return ResponseEntity.ok().build();
+    public String updateMessage(@PathVariable String messageId, @RequestParam String text, @RequestParam String userId, @RequestParam String chatroomId, Model model) {
+        model.addAttribute("message", messageService.update(Message.builder().id(messageId).text(text).userId(userId).chatroomId(chatroomId).build()));
+        return "redirect:/message";
     }
 
     @DeleteMapping("/{messageId}")
-    public ResponseEntity<Message> deleteUser(@PathVariable String messageId) {
-        return ResponseEntity.ok().build();
+    public void messageDelete(@PathVariable String messageId) {
+        messageService.delete(messageId);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.chatrooms.domain;
 import javax.persistence.*;
 
+import lombok.Builder;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Entity
 @Table(name = "chatroom")
 public class Chatroom {

@@ -3,6 +3,7 @@ package com.example.chatrooms.domain;
 
 import javax.persistence.*;
 
+import lombok.Builder;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Entity
 @Table(name = "user")
 public class User {
