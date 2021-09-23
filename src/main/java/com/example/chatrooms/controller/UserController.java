@@ -36,18 +36,29 @@ public class UserController {
         model.addAttribute("user", username);
         model.addAttribute("role", role);
         model.addAttribute("password", password);
-        userService.create(User.builder().username(username).password(password).role(Role.valueOf(role)).build());
+
         return "userEdit";
     }
 
     @PutMapping("{userId}")
     public String updateUser(@PathVariable String userId, @RequestParam String username, @RequestParam String password, @RequestParam String role, Model model) {
-        model.addAttribute("user", userService.update(User.builder().id(userId).username(username).password(password).role(Role.valueOf(role)).build()));
+        model.addAttribute("user", userId);
         return "redirect:/user";
     }
 
     @DeleteMapping("/{userId}")
     public void userDelete(@PathVariable String userId) {
         userService.delete(userId);
+    }
+
+    @GetMapping("/{userId}/{blockUserId}")
+    public String blockUser(@PathVariable String userId, @PathVariable String blockUserId) {
+        userService.block(userId, blockUserId);
+        return "user";
+    }
+    @PutMapping("/{userId}/{switchUserId}")
+    public String switchRole (@PathVariable String userId, @PathVariable String switchUserId) {
+        userService.switchOn(userId, switchUserId);
+        return "user";
     }
 }

@@ -25,13 +25,13 @@ public class MessageController {
         model.addAttribute("text", text);
         model.addAttribute("userId", userId);
         model.addAttribute("chatroomId", chatroomId);
-        messageService.create(Message.builder().text(text).userId(userId).chatroomId(chatroomId).build());
+
         return "messageEdit";
     }
 
     @PutMapping("{messageId}")
     public String updateMessage(@PathVariable String messageId, @RequestParam String text, @RequestParam String userId, @RequestParam String chatroomId, Model model) {
-        model.addAttribute("message", messageService.update(Message.builder().id(messageId).text(text).userId(userId).chatroomId(chatroomId).build()));
+        model.addAttribute("message", messageId);
         return "redirect:/message";
     }
 

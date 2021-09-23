@@ -26,13 +26,12 @@ public class ChatroomController {
         model.addAttribute("name", name);
         model.addAttribute("ownerId", ownerId);
         model.addAttribute("privat", privat);
-        chatroomService.create(Chatroom.builder().name(name).ownerId(ownerId).privat(privat).build());
         return "chatroomEdit";
     }
 
     @PutMapping("{chatroomId}")
     public String updateChatroom(@PathVariable String chatroomId, @RequestParam String name, @RequestParam String ownerId, @RequestParam Boolean privat, Model model) {
-        model.addAttribute("chatroom", chatroomService.update(Chatroom.builder().id(chatroomId).name(name).ownerId(ownerId).privat(privat).build()));
+        model.addAttribute("chatroom", chatroomId);
         return "redirect:/chatroom";
     }
 

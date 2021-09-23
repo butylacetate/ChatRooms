@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 public class ChatroomService {
     private final ChatroomRepository chatroomRepository;
 
-    public Chatroom create(Chatroom chatroom) {
-        return chatroomRepository.save(chatroom);
+    public Chatroom create(String name, String ownerId, boolean privat) {
+        return chatroomRepository.save(Chatroom.builder().name(name).ownerId(ownerId).privat(privat).build());
     }
 
     public Chatroom getById(String id) {
         return chatroomRepository.findById(id).orElseThrow(() -> new RuntimeException("Chatroom not found"));
     }
 
-    public Chatroom update(Chatroom chatroom) {
-        return chatroomRepository.save(chatroom);
+    public Chatroom update(String chatroomId, String name, String ownerId, boolean privat) {
+        return chatroomRepository.save(Chatroom.builder().id(chatroomId).name(name).ownerId(ownerId).privat(privat).build());
     }
 
     public void delete(String chatroomId) {

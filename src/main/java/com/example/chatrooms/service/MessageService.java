@@ -11,8 +11,8 @@ public class MessageService {
     private final MessageRepository messageRepository;
 
 
-    public Message create(Message message) {
-        return messageRepository.save(message);
+    public Message create(String text, String userId, String chatroomId) {
+        return messageRepository.save(Message.builder().text(text).userId(userId).chatroomId(chatroomId).build());
     }
 
 
@@ -20,8 +20,8 @@ public class MessageService {
         return messageRepository.findById(id).orElseThrow(() -> new RuntimeException("Message not found"));
     }
 
-    public Message update(Message message) {
-        return messageRepository.save(message);
+    public Message update(String messageId, String text, String userId, String chatroomId) {
+        return messageRepository.save(Message.builder().id(messageId).text(text).userId(userId).chatroomId(chatroomId).build());
     }
 
     public void delete(String messageId) {
